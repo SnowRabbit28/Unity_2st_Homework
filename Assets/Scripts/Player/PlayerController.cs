@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed; // 움직이는 속도
     private Vector2 curMovementInput; // 지금 위치
     public float jumptForce; // 점프 힘
+    public LayerMask groundLayerMask;
 
     [Header("Look")]
     public Transform cameraContainer; // 마우스 위치
@@ -80,10 +81,31 @@ public class PlayerController : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context) 
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && IsGrounded())
         {
             rb.AddForce(Vector2.up * jumptForce, ForceMode.Impulse);
         }
+    }
+
+    bool IsGrounded()
+    {
+        Ray[] rays = new Ray[4] // 다리4개 생긴느낌
+        {
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.2f) +(transform.up * 0.01f), Vector3.down)
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            { //raycast로 검출 ( t / f 로 출력 )
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
