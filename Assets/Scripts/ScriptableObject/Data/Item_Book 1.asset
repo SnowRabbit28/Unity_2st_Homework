@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a49809b1302e53d40b3c3b8ebd012465, type: 3}
+  m_Name: Item_Book 1
+  m_EditorClassIdentifier: 
+  displayName: "\uB85C\uB9E8\uC2A4 \uCC45"
+  description: "\uB85C\uB9E8\uC2A4 \uCC45\uC785\uB2C8\uB2E4. \uB2EC\uB2EC\uD558\uB124\uC694."
+  type: 0
+  dropPrefab: {fileID: 5654627954147086588, guid: e281f0ace99bd074690d1fb6d625b492, type: 3}
+  canStack: 1
+  maxStackAmount: 3
+  consumables: []
+  equipPrefab: {fileID: 0}
