@@ -1,4 +1,3 @@
-
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,14 +6,16 @@ public class Interaction : MonoBehaviour
 {
     public float checkRate = 0.05f;
     private float lastCheckTime;
-    public float maxCheckDistance; //얼마나 멀리있는거에 채크할지
-    public LayerMask layerMask; // 어떤 레이어에 담긴걸 추출할래
+    public float maxCheckDistance;
+    public LayerMask layerMask;
 
-    public GameObject curInteractGameObject; // 상호작용되었다면 정보 가지고 있기
-    private IInteractable curInteractable; // 인터페이스 캐싱
+    public GameObject curInteractGameObject;
+    private IInteractable curInteractable;
 
-    public TextMeshProUGUI promptText; // 띄워야지!
+    public TextMeshProUGUI promptText;
     private Camera camera;
+
+    private UseItem useItem;
 
     void Start()
     {
@@ -24,7 +25,10 @@ public class Interaction : MonoBehaviour
             camera = FindObjectOfType<Camera>();
             Debug.Log(camera == null ? "Camera is still null" : "Camera found using FindObjectOfType");
         }
+
+        useItem = GetComponent<UseItem>();
     }
+
     void Update()
     {
         if (Time.time - lastCheckTime > checkRate)
@@ -63,6 +67,12 @@ public class Interaction : MonoBehaviour
         if (context.phase == InputActionPhase.Started && curInteractable != null)
         {
             curInteractable.OnInteract();
+
+            if (useItem != null && useItem.CanUseItem())
+            {
+                useItem.ApplyItemEffect();
+            }
+
             curInteractGameObject = null;
             curInteractable = null;
             promptText.gameObject.SetActive(false);
