@@ -9,9 +9,17 @@ public enum ItemType
 
 public enum ConsumableType
 {
-    Hunger,
+    Health,
     Shield
 }
+public enum EffectType
+{
+    None,
+    HealShield,
+    SpeedBoost,
+    DoubleJump
+}
+
 
 [System.Serializable]
 public class ItemDataConsumable //얼마만큼 업그레이드 될건지
@@ -35,5 +43,9 @@ public class ItemData : ScriptableObject
 
     [Header("Consumable")]
     public ItemDataConsumable[] consumables;
+
+    [Header("Effect")]
+    public EffectType effectType; // 아이템 효과 타입 추가
+
 
 }

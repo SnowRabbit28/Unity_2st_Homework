@@ -20,13 +20,7 @@ public class Interaction : MonoBehaviour
     void Start()
     {
         camera = Camera.main;
-        if (camera == null)
-        {
-            camera = FindObjectOfType<Camera>();
-            Debug.Log(camera == null ? "Camera is still null" : "Camera found using FindObjectOfType");
-        }
-
-        useItem = GetComponent<UseItem>();
+               
     }
 
     void Update()
@@ -44,6 +38,7 @@ public class Interaction : MonoBehaviour
                 {
                     curInteractGameObject = hit.collider.gameObject;
                     curInteractable = hit.collider.GetComponent<IInteractable>();
+                    useItem = hit.collider.gameObject.GetComponent<UseItem>();
                     SetPromptText();
                 }
             }
