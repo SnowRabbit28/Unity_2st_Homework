@@ -4,8 +4,8 @@ using System.Collections;
 public class UseItem : MonoBehaviour
 {
     public ItemData itemData;
-    public float speedBoostMultiplier = 2f;
-    public float boostDuration = 5f;
+    public float speedBoostMultiplier;
+    public float boostDuration;
 
     private PlayerController playerController;
     private float originalSpeed;

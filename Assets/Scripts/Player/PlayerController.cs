@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float jumptForce; // 점프 힘
     public LayerMask groundLayerMask;
 
+    public float useStamina;
+
     [Header("Look")]
     public Transform cameraContainer; // 마우스 위치
     public float minXLook; // 최소회전범위
@@ -81,7 +83,11 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            rb.AddForce(Vector2.up * jumptForce, ForceMode.Impulse);
+            if (CharacterManager.Instance.player.condition.UseStamina(useStamina))
+            {
+            
+                rb.AddForce(Vector2.up * jumptForce, ForceMode.Impulse);
+            }
         }
     }
 

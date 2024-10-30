@@ -1,5 +1,5 @@
 using System;
-
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
@@ -41,5 +41,15 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
+    }
+
+    public bool UseStamina(float amount)
+    {
+        if(stamina.curValue - amount < 0f )
+        {
+            return false;
+        }
+        stamina.Subtract(amount);
+        return true;
     }
 }
